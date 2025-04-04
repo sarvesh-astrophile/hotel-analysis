@@ -1,0 +1,16 @@
+fastapi
+pydantic
+pandas
+matplotlib
+seaborn
+SQLAlchemy
+python-dotenv
+google-generativeai
+litellm
+smolagents
+chromadb
+tqdm
+uvicorn
+pysqlite3-binary
+numpy
+gunicorn
