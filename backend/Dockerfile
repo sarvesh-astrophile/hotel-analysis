@@ -1,58 +1,18 @@
-# 1 - Download & Install Python 3
-FROM python:3.13.2-slim-bullseye
+FROM python:3.11-slim
 
+WORKDIR /app
 
-# Create a virtual environment
-RUN python -m venv /opt/venv
+COPY requirements.txt .
 
-# Set the virtual environment as the current location
-ENV PATH=/opt/venv/bin:$PATH
-
-# Upgrade pip
-RUN pip install --upgrade pip
-
-# Set Python-related environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Install os dependencies for our mini vm
-RUN apt-get update && apt-get install -y \
-    # for postgres
-    libpq-dev \
-    # for Pillow
-    libjpeg-dev \
-    # for CairoSVG
-    libcairo2 \
-    # other
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
-# Create the mini vm's code directory
-RUN mkdir -p /code
-
-# Set the working directory to that same code directory
-WORKDIR /code
-
-# Copy the requirements file into the container
-COPY requirements.txt /tmp/requirements.txt
-
-# copy the project code into the container's working directory
-COPY ./src /code
-
-# Install the Python project requirements
-RUN pip install -r /tmp/requirements.txt
-
-
-# make the bash script executable
-COPY ./boot/docker-run.sh /opt/run.sh
-RUN chmod +x /opt/run.sh
-
-# Clean up apt cache to reduce image size
-RUN apt-get remove --purge -y \
-    && apt-get autoremove -y \
+# Install build dependencies for pysqlite3, install requirements, then remove build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends gcc libsqlite3-dev \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apt-get remove -y --auto-remove gcc libsqlite3-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Run the FastAPI project via the runtime script
-# when the container starts
-CMD ["/opt/run.sh"]
+COPY src/ src/
+
+EXPOSE 8000
+
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

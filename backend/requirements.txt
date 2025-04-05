@@ -11,6 +11,6 @@ smolagents
 chromadb
 tqdm
 uvicorn
-pysqlite3-binary
+pysqlite3==0.5.4
 numpy
 gunicorn

@@ -1,18 +1,17 @@
 from fastapi import FastAPI, HTTPException, APIRouter
 from src.agent_rag import execute_query
-from database import write_to_db
-from utils import create_db_engine
+from src.database import write_to_db
+from src.utils import create_db_engine
 from pydantic import BaseModel
 import logging
 import pandas as pd
 from typing import List, Dict, Any
-from embed import main
 
-from analytics.revenue import analyze_revenue_trends
-from analytics.cancellation import analyze_cancellation_rates
-from analytics.geographical import analyze_geographical_distribution
-from analytics.booking_lead import analyze_lead_time_distribution
-from analytics.satisfaction import analyze_customer_satisfaction
+from src.analytics.revenue import analyze_revenue_trends
+from src.analytics.cancellation import analyze_cancellation_rates
+from src.analytics.geographical import analyze_geographical_distribution
+from src.analytics.booking_lead import analyze_lead_time_distribution
+from src.analytics.satisfaction import analyze_customer_satisfaction
 
 
 # Set up logging
@@ -79,7 +78,7 @@ async def get_analytics(request: AnalyticsRequest):
             )
         
         # Call the appropriate analysis function
-        image_base64, explanation = analysis_functions[request.analysis_type](params)
+        image_base64, explanation = analysis_functions[request.analysis_type](params=None)
         
         # Return the analysis results
         return {
@@ -125,7 +124,6 @@ async def update_database(df_input: DataFrameInput):
         
         # Write to database using the imported function
         write_to_db(df, df_input.table_name, conn)
-        main(custom_df=df)
         return {
             "status": "success",
             "message": f"Successfully updated table {df_input.table_name} with {len(df)} records"
