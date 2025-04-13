@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SSE Test</title>
+  </head>
+  <body>
+    <h1>Streaming Results</h1>
+    <div id="output"></div>
+
+    <script>
+      const outputDiv = document.getElementById("output");
+      const query = "What is the average price of a hotel booking?"; // Or your desired query
+
+      outputDiv.innerHTML += "<p>Connecting...</p>";
+
+      /* // Comment out the POST attempt
+      const evtSource = new EventSource("http://localhost:8000/ask", {
+        method: "POST", // EventSource doesn't directly support POST, this is a workaround
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: query }),
+      });
+      */
+
+      // Note: Standard EventSource doesn't easily support POST bodies.
+      // For a robust *frontend* implementation, you might need a fetch-based approach
+      // that reads the stream manually or use a library that handles SSE with POST.
+      // However, for a quick *test*, some backend frameworks might interpret the EventSource
+      // POST correctly, or you might adjust the endpoint temporarily to use GET with query params for testing.
+
+      // *** Simplified GET Test (if you temporarily adjust endpoint) ***
+      const evtSource = new EventSource(
+        `http://localhost:8000/ask?query=${encodeURIComponent(query)}`
+      ); // Use GET with URL parameter
+
+      evtSource.onopen = function () {
+        outputDiv.innerHTML += "<p>Connection opened.</p>";
+      };
+
+      evtSource.onmessage = function (event) {
+        console.log("Raw data:", event.data);
+        try {
+          const data = JSON.parse(event.data);
+          const p = document.createElement("p");
+          if (data.type === "thought") {
+            p.style.color = "grey";
+            p.textContent = `Thought: ${data.content}`;
+          } else if (data.type === "result") {
+            p.style.fontWeight = "bold";
+            p.textContent = `Result: ${data.content}`;
+            evtSource.close(); // Close connection after getting the final result
+          } else if (data.type === "error") {
+            p.style.color = "red";
+            p.style.fontWeight = "bold";
+            p.textContent = `Error: ${data.content}`;
+            evtSource.close();
+          }
+          outputDiv.appendChild(p);
+        } catch (e) {
+          console.error("Failed to parse JSON:", e);
+          outputDiv.innerHTML += `<p>Error parsing data: ${event.data}</p>`;
+        }
+      };
+
+      evtSource.onerror = function (err) {
+        console.error("EventSource failed:", err);
+        outputDiv.innerHTML += "<p>Connection error.</p>";
+        evtSource.close();
+      };
+    </script>
+  </body>
+</html>
