@@ -1,6 +1,9 @@
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
+import { StagewiseToolbar } from "@stagewise/toolbar-next";
+import { ReactPlugin } from "@stagewise-plugins/react";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -17,6 +20,8 @@ export default function ChatLayout({
     <html lang="en">
       <body>
         <div className="min-h-screen bg-white">{children}</div>
+        <StagewiseToolbar config={{ plugins: [ReactPlugin] }} />
+        <Toaster richColors theme="light" />
       </body>
     </html>
   );

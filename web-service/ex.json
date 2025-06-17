@@ -1,0 +1,27 @@
+{
+    "revenue": {
+      "heading": "Revenue Trends Analysis",
+      "image": "base64 image",
+      "explanation": "This chart shows the revenue trends across different hotel types over the entire period.\n\nTotal revenue: €25,996,260.41\nAverage monthly revenue: €499,928.08\nHighest revenue (€1,084,751.27) was recorded in August 2017\n\nCity Hotel hotels generated the highest total revenue (€14,394,410.18)\n\nRevenue distribution: City Hotel: 55.4%, Resort Hotel: 44.6%\n\nThe overall revenue trend is increasing over the years."
+    },
+    "cancellation": {
+      "heading": "Cancellation Rates Analysis",
+      "image": "base64 image",
+      "explanation": "This chart shows the cancellation rates across different hotel types over the entire period.\n\nTotal bookings: 119,390\nTotal cancellations: 44,224\nOverall cancellation rate: 37.04%\n\nHighest cancellation rate: 67.17% (July 2015, City Hotel)\nLowest cancellation rate: 13.46% (January 2016, Resort Hotel)\n\nCity Hotel hotels:\n  - Cancellation rate: 41.73%\n  - Total bookings: 79,330\n\nResort Hotel hotels:\n  - Cancellation rate: 27.76%\n  - Total bookings: 40,060\n\nCity Hotel hotels have a 13.96% higher cancellation rate than Resort Hotel hotels.\n\nThe overall cancellation rate trend is increasing over the years."
+    },
+    "geographical": {
+      "heading": "Geographical Distribution Analysis",
+      "image": "base64 image",
+      "explanation": "This chart shows the geographical distribution of bookings across different hotel types over the entire period.\n\nTotal bookings: 119,390\nNumber of countries: 178\n\nTop 5 countries by number of bookings:\n  - PRT: 48,590 bookings (40.7% of total)\n  - GBR: 12,129 bookings (10.2% of total)\n  - FRA: 10,415 bookings (8.7% of total)\n  - ESP: 8,568 bookings (7.2% of total)\n  - DEU: 7,287 bookings (6.1% of total)\n\nThe top 5 countries account for 72.9% of all bookings.\n\nIn PRT (the top country), City Hotel is the most popular hotel type with 30,960 bookings (63.7% of bookings from this country).\n\nDomestic bookings (from Portugal) account for 40.7% of all bookings, while international bookings account for 59.3%."
+    },
+    "booking_lead": {
+      "heading": "Booking Lead Time Analysis",
+      "image": "base64 image",
+      "explanation": "This chart shows the lead time distribution across different hotel types over the entire period.\n\nBooking lead time statistics:\n  - Average lead time: 104.0 days\n  - Median lead time: 69 days\n  - Minimum lead time: 0 days\n  - Maximum lead time: 737 days\n\nLead time distribution:\n  - 0-7 days: 11.9%\n  - 8-30 days: 16.8%\n  - 31-90 days: 26.1%\n  - 91-180 days: 23.4%\n  - 181-365 days: 19.1%\n  - 365+ days: 2.8%\n\nThe most common booking window is 31-90 days (26.1% of bookings).\n\nLead time comparison by hotel type:\n  - Resort Hotel:\n    - Average lead time: 92.7 days\n    - Median lead time: 57 days\n  - City Hotel:\n    - Average lead time: 109.7 days\n    - Median lead time: 74 days\n\nCity Hotel bookings have on average 17.1 days longer lead time than Resort Hotel bookings.\n\nRelationship between lead time and cancellation:\n  - Average lead time for canceled bookings: 144.8 days\n  - Average lead time for non-canceled bookings: 80.0 days\n\nBookings with longer lead times are more likely to be canceled."
+    },
+    "satisfaction": {
+      "heading": "Customer Satisfaction Analysis",
+      "image": "base64 image",
+      "explanation": "This analysis shows customer satisfaction metrics across different hotel types over the entire period.\n\nTotal completed stays analyzed: 75,166\n\nKey satisfaction indicators:\n  - Room type match rate: 81.2% (guests received their reserved room type)\n  - Repeat guest rate: 0.0% (returning customers)\n  - Average special requests per booking: 0.71\n\nSpecial requests distribution:\n  - 0 requests: 48.9%\n  - 1 requests: 34.5%\n  - 2 requests: 13.4%\n  - 3 requests: 2.7%\n  - 4 requests: 0.4%\n  - 5 requests: 0.1%\n\nSatisfaction comparison by hotel type:\n\nResort Hotel:\n  - Room type match rate: 74.6%\n  - Repeat guest rate: 0.0%\n  - Average special requests: 0.67\n\nCity Hotel:\n  - Room type match rate: 85.3%\n  - Repeat guest rate: 0.0%\n  - Average special requests: 0.74\n\nCity Hotel hotels have a higher room type match rate.\nCity Hotel hotels have a higher repeat guest rate.\n\n20.3% of bookings had changes after the initial reservation.\n\nWhen room types don't match, guests most commonly reserved room type 'A' but were assigned room type 'D'."
+    }
+  }

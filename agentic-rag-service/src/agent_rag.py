@@ -64,9 +64,9 @@ def create_llm_model():
     """Create and return a LiteLLM model instance."""
     api_keys = load_api_keys()
     return LiteLLMModel(
-        model_id="gemini/gemini-2.0-flash-exp", # "gemini-2.0-flash-exp",  # Specify the Gemini model ID
+        model_id="gemini/gemini-2.5-flash-preview-05-20", # "gemini-2.5-flash-exp",  # Specify the Gemini model ID
         api_key=api_keys['gemini'],  # Use your API key from environment variables
-        project_id="lambda4110"
+        project_id="lambda4110",
     )
 
 

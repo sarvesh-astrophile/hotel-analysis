@@ -47,29 +47,29 @@ class DataFrameInput(BaseModel):
 class AnalyticsRequest(BaseModel):
     analysis_type: str
 
-@router.post("/ask")
-async def execute_sql_query(query_request: QueryRequest):
-    """
-    Receives a SQL query, executes it using the agent,
-    and streams back thoughts and the final result as Server-Sent Events (SSE).
-    """
-    query = query_request.query
-    logger.info(f"Processing streaming query: {query}")
+# @router.post("/ask")
+# async def execute_sql_query(query_request: QueryRequest):
+#     """
+#     Receives a SQL query, executes it using the agent,
+#     and streams back thoughts and the final result as Server-Sent Events (SSE).
+#     """
+#     query = query_request.query
+#     logger.info(f"Processing streaming query: {query}")
 
-    async def stream_generator() -> AsyncGenerator[str, None]:
-        try:
-            async for item in execute_query(query):
-                # Format as Server-Sent Event (SSE)
-                # Ensure data is json-encoded string
-                yield f"data: {json.dumps(item)}\n\n"
-                await asyncio.sleep(0.02) # Small delay between messages
-        except Exception as e:
-            logger.error(f"Error during streaming query execution: {str(e)}")
-            # Yield a final error message in SSE format
-            error_message = {"type": "error", "content": f"Failed to process query: {str(e)}"}
-            yield f"data: {json.dumps(error_message)}\n\n"
+#     async def stream_generator() -> AsyncGenerator[str, None]:
+#         try:
+#             async for item in execute_query(query):
+#                 # Format as Server-Sent Event (SSE)
+#                 # Ensure data is json-encoded string
+#                 yield f"data: {json.dumps(item)}\n\n"
+#                 await asyncio.sleep(0.02) # Small delay between messages
+#         except Exception as e:
+#             logger.error(f"Error during streaming query execution: {str(e)}")
+#             # Yield a final error message in SSE format
+#             error_message = {"type": "error", "content": f"Failed to process query: {str(e)}"}
+#             yield f"data: {json.dumps(error_message)}\n\n"
 
-    return StreamingResponse(stream_generator(), media_type="text/event-stream")
+#     return StreamingResponse(stream_generator(), media_type="text/event-stream")
 
 # Add a GET endpoint for easier browser testing with EventSource
 @router.get("/ask")

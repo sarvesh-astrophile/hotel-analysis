@@ -1,15 +1,6 @@
-"use client";
-import ChatInterface from "./_components/ChatInterface";
-import LoadingBar from "react-top-loading-bar";
-import { useRef } from "react";
+import AnalyticsDashboard from "./_components/AnalyticsDashboard";
+import ChatPageClient from "./_components/ChatPageClient";
 
 export default function ChatPage() {
-  const loadingBarRef = useRef(null);
-
-  return (
-    <>
-      <LoadingBar color="#2563eb" height={3} ref={loadingBarRef} />
-      <ChatInterface />
-    </>
-  );
+  return <ChatPageClient analyticsDashboard={<AnalyticsDashboard />} />;
 }
